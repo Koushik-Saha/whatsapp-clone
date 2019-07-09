@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.whatsapp.LoginActivity">
+    tools:context=".LoginActivity">
 
 
     <ScrollView
@@ -62,16 +62,16 @@
                 android:id="@+id/forget_password_link"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/login_password"
-                android:text="Forget Password ?"
-                android:layout_marginTop="2dp"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
                 android:layout_marginLeft="15dp"
+                android:layout_marginTop="2dp"
                 android:layout_marginRight="23dp"
-                android:textAlignment="textEnd"
+                android:text="Forget Password ?"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="17sp"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimaryDark"/>
+                android:textStyle="bold" />
 
 
 
@@ -96,6 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
+                android:gravity="center"
                 android:layout_below="@+id/login_button"
                 android:text="Need new Account ?"
                 android:layout_marginTop="2dp"
@@ -111,8 +112,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
+                android:gravity="center"
                 android:layout_below="@+id/need_new_account_link"
-                android:text="pr Login using your"
+                android:text="or Login using your"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="23dp"

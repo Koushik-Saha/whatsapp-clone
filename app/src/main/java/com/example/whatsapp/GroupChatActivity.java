@@ -69,6 +69,8 @@ public class GroupChatActivity extends AppCompatActivity {
                 SaveMessageInfoToDatabase();
 
                 userMessageInput.setText("");
+
+                mScrollView.fullScroll(ScrollView.FOCUS_DOWN);
             }
         });
     }
@@ -196,6 +198,9 @@ public class GroupChatActivity extends AppCompatActivity {
             String chatTime = (String) ((DataSnapshot)iterator.next()).getValue();
 
             displayTextMessages.append(chatName + " :\n" + chatMessage + "\n" + chatTime + "      " + chatDate + "\n\n\n");
+
+
+            mScrollView.fullScroll(ScrollView.FOCUS_DOWN);
 
         }
     }

@@ -18,9 +18,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
-public class RegisterActivity extends AppCompatActivity {
-
+public class RegisterActivity extends AppCompatActivity
+{
     private Button CreateAccountButton;
     private EditText UserEmail, UserPassword;
     private TextView AlreadyHaveAccountLink;
@@ -30,8 +31,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     private ProgressDialog loadingBar;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
@@ -39,47 +42,49 @@ public class RegisterActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         RootRef = FirebaseDatabase.getInstance().getReference();
 
+
         InitializeFields();
 
 
-        AlreadyHaveAccountLink.setOnClickListener(new View.OnClickListener() {
+        AlreadyHaveAccountLink.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-
+            public void onClick(View view)
+            {
                 SendUserToLoginActivity();
-
             }
         });
 
 
         CreateAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
+            public void onClick(View view)
+            {
                 CreateNewAccount();
             }
         });
-
-
     }
 
-    private void CreateNewAccount() {
 
+
+
+    private void CreateNewAccount()
+    {
         String email = UserEmail.getText().toString();
         String password = UserPassword.getText().toString();
-        
+
         if (TextUtils.isEmpty(email))
         {
-            Toast.makeText(this, "Please Enter Email.....", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter email...", Toast.LENGTH_SHORT).show();
         }
         if (TextUtils.isEmpty(password))
         {
-            Toast.makeText(this, "Please Enter Password....", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enter password...", Toast.LENGTH_SHORT).show();
         }
         else
         {
             loadingBar.setTitle("Creating New Account");
-            loadingBar.setMessage("Please wait, while we are creating new account for you .....");
+            loadingBar.setMessage("Please wait, while we wre creating new account for you...");
             loadingBar.setCanceledOnTouchOutside(true);
             loadingBar.show();
 
@@ -90,11 +95,17 @@ public class RegisterActivity extends AppCompatActivity {
                         {
                             if (task.isSuccessful())
                             {
+                                String deviceToken = FirebaseInstanceId.getInstance().getToken();
+
                                 String currentUserID = mAuth.getCurrentUser().getUid();
                                 RootRef.child("Users").child(currentUserID).setValue("");
 
+
+                                RootRef.child("Users").child(currentUserID).child("device_token")
+                                        .setValue(deviceToken);
+
                                 SendUserToMainActivity();
-                                Toast.makeText(RegisterActivity.this, "Account Created Successfully....", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, "Account Created Successfully...", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
                             }
                             else
@@ -103,14 +114,16 @@ public class RegisterActivity extends AppCompatActivity {
                                 Toast.makeText(RegisterActivity.this, "Error : " + message, Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
                             }
-
                         }
                     });
         }
     }
 
-    private void InitializeFields() {
 
+
+
+    private void InitializeFields()
+    {
         CreateAccountButton = (Button) findViewById(R.id.register_button);
         UserEmail = (EditText) findViewById(R.id.register_email);
         UserPassword = (EditText) findViewById(R.id.register_password);
@@ -119,17 +132,20 @@ public class RegisterActivity extends AppCompatActivity {
         loadingBar = new ProgressDialog(this);
     }
 
-    private void SendUserToLoginActivity() {
 
+    private void SendUserToLoginActivity()
+    {
         Intent loginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(loginIntent);
     }
 
-    private void SendUserToMainActivity() {
 
+    private void SendUserToMainActivity()
+    {
         Intent mainIntent = new Intent(RegisterActivity.this, MainActivity.class);
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(mainIntent);
         finish();
     }
+
 }

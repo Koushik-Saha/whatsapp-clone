@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity
     private TabLayout myTabLayout;
     private TabsAccessorAdapter myTabsAccessorAdapter;
 
-    private FirebaseUser currentUser;
+//    private FirebaseUser currentUser;
     private FirebaseAuth mAuth;
     private DatabaseReference RootRef;
     private String currentUserID;
@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity
 
 
         mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
-        currentUserID = mAuth.getCurrentUser().getUid();
+//        currentUser = mAuth.getCurrentUser();
+//        currentUserID = mAuth.getCurrentUser().getUid();
         RootRef = FirebaseDatabase.getInstance().getReference();
 
 
@@ -75,6 +75,8 @@ public class MainActivity extends AppCompatActivity
     {
         super.onStart();
 
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
         if (currentUser == null)
         {
             SendUserToLoginActivity();
@@ -91,7 +93,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onStop()
     {
+
         super.onStop();
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if (currentUser != null)
         {
@@ -104,7 +109,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onDestroy()
     {
+
         super.onDestroy();
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if (currentUser != null)
         {
@@ -275,6 +283,8 @@ public class MainActivity extends AppCompatActivity
         onlineStateMap.put("time", saveCurrentTime);
         onlineStateMap.put("date", saveCurrentDate);
         onlineStateMap.put("state", state);
+
+        currentUserID = mAuth.getCurrentUser().getUid();
 
         RootRef.child("Users").child(currentUserID).child("userState")
                 .updateChildren(onlineStateMap);

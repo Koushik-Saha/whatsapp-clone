@@ -120,7 +120,7 @@ public class RequestsFragment extends Fragment
                                                 final String requestUserStatus = dataSnapshot.child("status").getValue().toString();
 
                                                 holder.userName.setText(requestUserName);
-                                                holder.userStatus.setText("Wants to connect with you.");
+                                                holder.userStatus.setText("wants to connect with you.");
 
 
                                                 holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -285,7 +285,7 @@ public class RequestsFragment extends Fragment
                                                                                                     {
                                                                                                         if (task.isSuccessful())
                                                                                                         {
-                                                                                                            Toast.makeText(getContext(), "You have cancelled the chat request.", Toast.LENGTH_SHORT).show();
+                                                                                                            Toast.makeText(getContext(), "you have cancelled the chat request.", Toast.LENGTH_SHORT).show();
                                                                                                         }
                                                                                                     }
                                                                                                 });

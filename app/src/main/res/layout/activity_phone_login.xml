@@ -6,9 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".PhoneLoginActivity">
 
-
     <EditText
-        android:id="@+id/phone_number_input"
+        android:id="@+id/phone_nnumber_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -17,13 +16,13 @@
         android:layout_marginTop="180dp"
         android:background="@drawable/inputs"
         android:padding="8dp"
-        android:hint="Write phone number here...."
+        android:hint="Write Your Phone number"
         android:textAllCaps="false"
         android:textSize="15sp"
         android:drawableStart="@drawable/phone"
         android:textAlignment="center"
-        android:textStyle="bold"/>
-
+        android:textStyle="bold"
+        />
 
     <EditText
         android:id="@+id/verification_code_input"
@@ -34,15 +33,17 @@
         android:layout_marginEnd="17dp"
         android:layout_marginTop="4dp"
         android:background="@drawable/inputs"
-        android:layout_below="@+id/phone_number_input"
+        android:layout_below="@+id/phone_nnumber_input"
         android:padding="5dp"
-        android:hint="Write verification code here...."
+        android:hint="Write Verification Code Here"
         android:textAllCaps="false"
         android:textSize="15sp"
         android:drawableStart="@drawable/password"
         android:textAlignment="center"
         android:textStyle="bold"
-        android:visibility="invisible"/>
+        android:visibility="invisible"
+        />
+
 
     <Button
         android:id="@+id/send_ver_code_button"

@@ -29,40 +29,44 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 
-
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity
+{
     private Toolbar mToolbar;
     private ViewPager myViewPager;
     private TabLayout myTabLayout;
     private TabsAccessorAdapter myTabsAccessorAdapter;
 
+    private FirebaseUser currentUser;
     private FirebaseAuth mAuth;
     private DatabaseReference RootRef;
     private String currentUserID;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
 
         mAuth = FirebaseAuth.getInstance();
-
-//        currentUserID = mAuth.getCurrentUser().getUid();
+        currentUser = mAuth.getCurrentUser();
+        currentUserID = mAuth.getCurrentUser().getUid();
         RootRef = FirebaseDatabase.getInstance().getReference();
+
 
         mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("Potro");
 
+
         myViewPager = (ViewPager) findViewById(R.id.main_tabs_pager);
         myTabsAccessorAdapter = new TabsAccessorAdapter(getSupportFragmentManager());
         myViewPager.setAdapter(myTabsAccessorAdapter);
 
+
         myTabLayout = (TabLayout) findViewById(R.id.main_tabs);
         myTabLayout.setupWithViewPager(myViewPager);
-
     }
 
 
@@ -71,15 +75,13 @@ public class MainActivity extends AppCompatActivity {
     {
         super.onStart();
 
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-
         if (currentUser == null)
         {
             SendUserToLoginActivity();
         }
         else
         {
-            updateUserStatus("Online");
+            updateUserStatus("online");
 
             VerifyUserExistance();
         }
@@ -91,11 +93,9 @@ public class MainActivity extends AppCompatActivity {
     {
         super.onStop();
 
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-
         if (currentUser != null)
         {
-            updateUserStatus("Offline");
+            updateUserStatus("offline");
         }
     }
 
@@ -106,32 +106,30 @@ public class MainActivity extends AppCompatActivity {
     {
         super.onDestroy();
 
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-
         if (currentUser != null)
         {
-            updateUserStatus("Offline");
+            updateUserStatus("offline");
         }
     }
 
 
-    private void VerifyUserExistance() {
 
+    private void VerifyUserExistance()
+    {
         String currentUserID = mAuth.getCurrentUser().getUid();
 
         RootRef.child("Users").child(currentUserID).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
                 if ((dataSnapshot.child("name").exists()))
                 {
-                    Toast.makeText(MainActivity.this, "Welcome!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
                     SendUserToSettingsActivity();
                 }
-
             }
 
             @Override
@@ -142,9 +140,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         super.onCreateOptionsMenu(menu);
 
         getMenuInflater().inflate(R.menu.options_menu, menu);
@@ -181,24 +180,24 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private void RequestNewGroup() {
-
+    private void RequestNewGroup()
+    {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.AlertDialog);
         builder.setTitle("Enter Group Name :");
 
         final EditText groupNameField = new EditText(MainActivity.this);
-        groupNameField.setHint("Group Name");
+        groupNameField.setHint("e.g Coding Cafe");
         builder.setView(groupNameField);
 
         builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-
+            public void onClick(DialogInterface dialogInterface, int i)
+            {
                 String groupName = groupNameField.getText().toString();
 
                 if (TextUtils.isEmpty(groupName))
                 {
-                    Toast.makeText(MainActivity.this, "Please Write Group Name....", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Please write Group Name...", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -207,56 +206,58 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int which)
+            public void onClick(DialogInterface dialogInterface, int i)
             {
                 dialogInterface.cancel();
             }
         });
 
         builder.show();
-
     }
 
-    private void CreateNewGroup(final String groupName) {
 
+
+    private void CreateNewGroup(final String groupName)
+    {
         RootRef.child("Groups").child(groupName).setValue("")
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-
+                    public void onComplete(@NonNull Task<Void> task)
+                    {
                         if (task.isSuccessful())
                         {
-                            Toast.makeText(MainActivity.this, groupName + "group is Created Successfully....", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, groupName + " group is Created Successfully...", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
     }
 
 
-    private void SendUserToLoginActivity() {
 
+    private void SendUserToLoginActivity()
+    {
         Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(loginIntent);
-        finish();
+
     }
 
-
-    private void SendUserToSettingsActivity() {
-
+    private void SendUserToSettingsActivity()
+    {
         Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
         startActivity(settingsIntent);
-
     }
 
-    private void SendUserToFindFriendsActivity() {
 
+    private void SendUserToFindFriendsActivity()
+    {
         Intent findFriendsIntent = new Intent(MainActivity.this, FindFriendsActivity.class);
         startActivity(findFriendsIntent);
     }
+
+
 
     private void updateUserStatus(String state)
     {
@@ -274,8 +275,6 @@ public class MainActivity extends AppCompatActivity {
         onlineStateMap.put("time", saveCurrentTime);
         onlineStateMap.put("date", saveCurrentDate);
         onlineStateMap.put("state", state);
-
-        currentUserID = mAuth.getCurrentUser().getUid();
 
         RootRef.child("Users").child(currentUserID).child("userState")
                 .updateChildren(onlineStateMap);

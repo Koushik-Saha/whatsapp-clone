@@ -1,10 +1,11 @@
 package com.example.whatsapp;
 
 public class Contacts {
-
     public String name, status, image;
 
-    public Contacts() {
+    public Contacts()
+    {
+
     }
 
     public Contacts(String name, String status, String image) {

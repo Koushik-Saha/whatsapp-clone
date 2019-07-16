@@ -50,7 +50,7 @@
             android:id="@+id/input_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="type message here..."
+            android:hint="Type Message Here"
             android:padding="15dp"
             android:maxLines="5"
             android:layout_toEndOf="@+id/send_files_btn"

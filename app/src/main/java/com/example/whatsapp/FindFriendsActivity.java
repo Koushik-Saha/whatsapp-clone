@@ -18,23 +18,26 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
-
-public class FindFriendsActivity extends AppCompatActivity {
-
-
+public class FindFriendsActivity extends AppCompatActivity
+{
     private Toolbar mToolbar;
     private RecyclerView FindFriendsRecyclerList;
     private DatabaseReference UsersRef;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_friends);
 
 
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
+
 
         FindFriendsRecyclerList = (RecyclerView) findViewById(R.id.find_friends_recycler_list);
         FindFriendsRecyclerList.setLayoutManager(new LinearLayoutManager(this));
@@ -44,7 +47,7 @@ public class FindFriendsActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Find Fiends");
+        getSupportActionBar().setTitle("Find Friends");
     }
 
 
@@ -55,28 +58,27 @@ public class FindFriendsActivity extends AppCompatActivity {
 
         FirebaseRecyclerOptions<Contacts> options =
                 new FirebaseRecyclerOptions.Builder<Contacts>()
-                .setQuery(UsersRef, Contacts.class)
-                .build();
-
+                        .setQuery(UsersRef, Contacts.class)
+                        .build();
 
         FirebaseRecyclerAdapter<Contacts, FindFriendViewHolder> adapter =
                 new FirebaseRecyclerAdapter<Contacts, FindFriendViewHolder>(options) {
                     @Override
                     protected void onBindViewHolder(@NonNull FindFriendViewHolder holder, final int position, @NonNull Contacts model)
                     {
-                        holder.userName.setText(model.getName());;
+                        holder.userName.setText(model.getName());
                         holder.userStatus.setText(model.getStatus());
                         Picasso.get().load(model.getImage()).placeholder(R.drawable.profile_image).into(holder.profileImage);
 
 
                         holder.itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
-                            public void onClick(View v) {
-
+                            public void onClick(View view)
+                            {
                                 String visit_user_id = getRef(position).getKey();
 
-                                Intent profileIntent = new Intent(FindFriendsActivity.this,ProfileActivity.class);
-                                profileIntent.putExtra("visit_user_id",visit_user_id);
+                                Intent profileIntent = new Intent(FindFriendsActivity.this, ProfileActivity.class);
+                                profileIntent.putExtra("visit_user_id", visit_user_id);
                                 startActivity(profileIntent);
                             }
                         });
@@ -92,17 +94,18 @@ public class FindFriendsActivity extends AppCompatActivity {
                     }
                 };
 
-
         FindFriendsRecyclerList.setAdapter(adapter);
 
         adapter.startListening();
     }
 
 
+
     public static class FindFriendViewHolder extends RecyclerView.ViewHolder
     {
         TextView userName, userStatus;
         CircleImageView profileImage;
+
 
         public FindFriendViewHolder(@NonNull View itemView)
         {
@@ -111,8 +114,6 @@ public class FindFriendsActivity extends AppCompatActivity {
             userName = itemView.findViewById(R.id.user_profile_name);
             userStatus = itemView.findViewById(R.id.user_status);
             profileImage = itemView.findViewById(R.id.users_profile_image);
-
-
         }
     }
 }

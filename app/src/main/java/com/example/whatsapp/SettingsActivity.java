@@ -152,10 +152,10 @@ public class SettingsActivity extends AppCompatActivity
                         {
                             Toast.makeText(SettingsActivity.this, "Profile Image uploaded Successfully...", Toast.LENGTH_SHORT).show();
 
-                            final String downloadUrl = task.getResult().getDownloadUrl().toString();
+                            final String downloaedUrl = task.getResult().getDownloadUrl().toString();
 
                             RootRef.child("Users").child(currentUserID).child("image")
-                                    .setValue(downloadUrl)
+                                    .setValue(downloaedUrl)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task)

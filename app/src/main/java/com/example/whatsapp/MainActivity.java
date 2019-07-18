@@ -2,6 +2,7 @@ package com.example.whatsapp;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -29,6 +30,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 
+//import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+
 public class MainActivity extends AppCompatActivity
 {
     private Toolbar mToolbar;
@@ -42,11 +45,20 @@ public class MainActivity extends AppCompatActivity
     private String currentUserID;
 
 
+    Typeface tfLoginFonts;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+//        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+//                .setDefaultFontPath("fonts/Arkhip_font.ttf")
+//                .setFontAttrId(R.attr.fontPath)
+//                .build());
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -57,7 +69,8 @@ public class MainActivity extends AppCompatActivity
 
         mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("Potro");
+        getSupportActionBar().setTitle("P            O            T            R            O");
+
 
 
         myViewPager = (ViewPager) findViewById(R.id.main_tabs_pager);

@@ -2,6 +2,7 @@ package com.example.whatsapp;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,6 +31,8 @@ public class RegisterActivity extends AppCompatActivity
     private DatabaseReference RootRef;
 
     private ProgressDialog loadingBar;
+
+    Typeface tfLoginFonts;
 
 
     @Override
@@ -130,6 +133,13 @@ public class RegisterActivity extends AppCompatActivity
         AlreadyHaveAccountLink = (TextView) findViewById(R.id.already_have_account_link);
 
         loadingBar = new ProgressDialog(this);
+
+        tfLoginFonts = Typeface.createFromAsset(getAssets(),"fonts/Arkhip_font.ttf");
+        CreateAccountButton.setTypeface(tfLoginFonts);
+        UserEmail.setTypeface(tfLoginFonts);
+        UserPassword.setTypeface(tfLoginFonts);
+        AlreadyHaveAccountLink.setTypeface(tfLoginFonts);
+
     }
 
 

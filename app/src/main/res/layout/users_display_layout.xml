@@ -36,9 +36,8 @@
                     android:layout_height="wrap_content"
                     android:text="User Name"
                     android:textAlignment="textStart"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    />
+                    android:textAllCaps="false"
+                    android:textSize="18sp" />
 
                 <ImageView
                     android:id="@+id/user_online_status"
@@ -55,11 +54,11 @@
                 android:id="@+id/user_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="User Status"
                 android:layout_margin="2dp"
+                android:text="User Status"
                 android:textAlignment="textStart"
-                android:textSize="16sp"
-                />
+                android:textAllCaps="false"
+                android:textSize="16sp" />
 
 
             <LinearLayout

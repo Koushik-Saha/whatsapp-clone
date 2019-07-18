@@ -2,6 +2,7 @@ package com.example.whatsapp;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +22,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+
 public class LoginActivity extends AppCompatActivity
 {
     private FirebaseAuth mAuth;
@@ -28,9 +31,11 @@ public class LoginActivity extends AppCompatActivity
 
     private Button LoginButton, PhoneLoginButton;
     private EditText UserEmail, UserPassword;
-    private TextView NeedNewAccountLink, ForgetPasswordLink;
+    private TextView NeedNewAccountLink, ForgetPasswordLink, LoginUsingLink;
 
     private DatabaseReference UsersRef;
+
+    Typeface tfLoginFonts;
 
 
     @Override
@@ -38,6 +43,12 @@ public class LoginActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
+//        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+//                .setDefaultFontPath("fonts/Arkhip_font.ttf")
+//                .setFontAttrId(R.attr.fontPath)
+//                .build());
 
         mAuth = FirebaseAuth.getInstance();
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
@@ -156,7 +167,20 @@ public class LoginActivity extends AppCompatActivity
         UserPassword = (EditText) findViewById(R.id.login_password);
         NeedNewAccountLink = (TextView) findViewById(R.id.need_new_account_link);
         ForgetPasswordLink = (TextView) findViewById(R.id.forget_password_link);
+        LoginUsingLink = (TextView) findViewById(R.id.login_using);
         loadingBar = new ProgressDialog(this);
+
+
+        tfLoginFonts = Typeface.createFromAsset(getAssets(),"fonts/Arkhip_font.ttf");
+        LoginButton.setTypeface(tfLoginFonts);
+        PhoneLoginButton.setTypeface(tfLoginFonts);
+        UserEmail.setTypeface(tfLoginFonts);
+        UserPassword.setTypeface(tfLoginFonts);
+        NeedNewAccountLink.setTypeface(tfLoginFonts);
+        ForgetPasswordLink.setTypeface(tfLoginFonts);
+        LoginUsingLink.setTypeface(tfLoginFonts);
+
+
     }
 
 

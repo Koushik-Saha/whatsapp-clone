@@ -36,7 +36,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class SettingsActivity extends AppCompatActivity
 {
     private Button UpdateAccountSettings;
-    private EditText userName, userStatus;
+    private EditText userName, userStatus, userLocation, userWork;
     private CircleImageView userProfileImage;
 
     private String currentUserID;
@@ -61,6 +61,7 @@ public class SettingsActivity extends AppCompatActivity
         currentUserID = mAuth.getCurrentUser().getUid();
         RootRef = FirebaseDatabase.getInstance().getReference();
         UserProfileImagesRef = FirebaseStorage.getInstance().getReference().child("Profile Images");
+
 
 
         InitializeFields();
@@ -101,6 +102,8 @@ public class SettingsActivity extends AppCompatActivity
         userName = (EditText) findViewById(R.id.set_user_name);
         userStatus = (EditText) findViewById(R.id.set_profile_status);
         userProfileImage = (CircleImageView) findViewById(R.id.set_profile_image);
+        userLocation = (EditText) findViewById(R.id.set_profile_live_in);
+        userWork = (EditText) findViewById(R.id.set_profile_work);
         loadingBar = new ProgressDialog(this);
 
         SettingsToolBar = (Toolbar) findViewById(R.id.settings_toolbar);
@@ -193,6 +196,8 @@ public class SettingsActivity extends AppCompatActivity
     {
         String setUserName = userName.getText().toString();
         String setStatus = userStatus.getText().toString();
+        String setUserLocation = userLocation.getText().toString();
+        String setWork = userWork.getText().toString();
 
         if (TextUtils.isEmpty(setUserName))
         {
@@ -202,12 +207,22 @@ public class SettingsActivity extends AppCompatActivity
         {
             Toast.makeText(this, "Please write your status....", Toast.LENGTH_SHORT).show();
         }
+        if (TextUtils.isEmpty(setUserLocation))
+        {
+            Toast.makeText(this, "Please write your Current Location....", Toast.LENGTH_SHORT).show();
+        }
+        if (TextUtils.isEmpty(setWork))
+        {
+            Toast.makeText(this, "Please write where you work....", Toast.LENGTH_SHORT).show();
+        }
         else
         {
             HashMap<String, Object> profileMap = new HashMap<>();
             profileMap.put("uid", currentUserID);
             profileMap.put("name", setUserName);
             profileMap.put("status", setStatus);
+            profileMap.put("location", setUserLocation);
+            profileMap.put("work", setWork);
             RootRef.child("Users").child(currentUserID).updateChildren(profileMap)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -241,19 +256,27 @@ public class SettingsActivity extends AppCompatActivity
                         {
                             String retrieveUserName = dataSnapshot.child("name").getValue().toString();
                             String retrievesStatus = dataSnapshot.child("status").getValue().toString();
+                            String retrievesUserLocation = dataSnapshot.child("location").getValue().toString();
+                            String retrievesUserWork = dataSnapshot.child("work").getValue().toString();
                             String retrieveProfileImage = dataSnapshot.child("image").getValue().toString();
 
                             userName.setText(retrieveUserName);
                             userStatus.setText(retrievesStatus);
+                            userLocation.setText(retrievesUserLocation);
+                            userWork.setText(retrievesUserWork);
                             Picasso.get().load(retrieveProfileImage).into(userProfileImage);
                         }
                         else if ((dataSnapshot.exists()) && (dataSnapshot.hasChild("name")))
                         {
                             String retrieveUserName = dataSnapshot.child("name").getValue().toString();
                             String retrievesStatus = dataSnapshot.child("status").getValue().toString();
+                            String retrievesUserLocation = dataSnapshot.child("location").getValue().toString();
+                            String retrievesUserWork = dataSnapshot.child("work").getValue().toString();
 
                             userName.setText(retrieveUserName);
                             userStatus.setText(retrievesStatus);
+                            userLocation.setText(retrievesUserLocation);
+                            userWork.setText(retrievesUserWork);
                         }
                         else
                         {

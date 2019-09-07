@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity
         builder.setTitle("Enter Group Name :");
 
         final EditText groupNameField = new EditText(MainActivity.this);
-        groupNameField.setHint("e.g Coding Cafe");
+        groupNameField.setHint("Name Your Group Unique");
         builder.setView(groupNameField);
 
         builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity
 
                 if (TextUtils.isEmpty(groupName))
                 {
-                    Toast.makeText(MainActivity.this, "Please write Group Name...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Please write Group Name", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {

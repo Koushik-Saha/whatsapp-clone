@@ -82,6 +82,16 @@ public class LoginActivity extends AppCompatActivity
                 startActivity(phoneLoginIntent);
             }
         });
+
+
+        ForgetPasswordLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
+            }
+        });
+
     }
 
 

@@ -14,7 +14,7 @@
 
     <TextView
         android:id="@+id/receiver_message_text"
-        android:layout_width="wrap_content"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginTop="10dp"
@@ -25,7 +25,7 @@
         android:padding="10dp"
         android:textSize="14sp"
         android:textStyle="bold"
-        android:textColor="@android:color/black"
+        android:textColor="@color/colorBlack"
         />
 
 
@@ -51,17 +51,17 @@
 
     <TextView
         android:id="@+id/sender_messsage_text"
-        android:layout_width="wrap_content"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="10dp"
         android:layout_alignParentTop="@+id/receiver_message_text"
         android:background="@drawable/sender_messages_layout"
-        android:text="Sender Messages"
+        android:text="Sender Messages Here"
         android:textSize="14sp"
         android:padding="10dp"
         android:textStyle="bold"
-        android:textColor="@android:color/black"
+        android:textColor="@color/colorBlack"
         />
 
 </RelativeLayout>

@@ -13,6 +13,7 @@
         >
     </include>
 
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/set_profile_image"
         android:layout_width="300dp"
@@ -43,7 +44,7 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/set_profile_status"
+        android:id="@+id/set_profile_live_in"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/set_user_name"
@@ -53,6 +54,40 @@
         android:background="@drawable/inputs"
         android:drawableStart="@drawable/edit_status"
         android:hint="Write Your Own Ego"
+        android:inputType="textMultiLine"
+        android:padding="6dp"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/set_profile_work"
+        android:layout_width="383dp"
+        android:layout_height="59dp"
+        android:layout_below="@+id/set_profile_live_in"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/inputs"
+        android:drawableStart="@drawable/ic_edit_location_black_24dp"
+        android:hint="Current Location"
+        android:inputType="textMultiLine"
+        android:padding="6dp"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/set_profile_status"
+        android:layout_width="383dp"
+        android:layout_height="59dp"
+        android:layout_below="@+id/set_profile_work"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/inputs"
+        android:drawableStart="@drawable/ic_work_black_24dp"
+        android:hint="Where You Worked"
         android:inputType="textMultiLine"
         android:padding="6dp"
         android:textAlignment="center"

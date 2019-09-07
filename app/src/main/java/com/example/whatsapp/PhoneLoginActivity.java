@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -43,6 +44,8 @@ public class PhoneLoginActivity extends AppCompatActivity
 
     private DatabaseReference UsersRef;
 
+    Toolbar PhoneToolBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -53,6 +56,14 @@ public class PhoneLoginActivity extends AppCompatActivity
 
         mAuth = FirebaseAuth.getInstance();
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
+
+
+        PhoneToolBar = (Toolbar) findViewById(R.id.phone_toolbar);
+        setSupportActionBar(PhoneToolBar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Profile Request");
+
 
 
         SendVerificationCodeButton = (Button) findViewById(R.id.send_ver_code_button);

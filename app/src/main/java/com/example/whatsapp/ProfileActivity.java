@@ -4,6 +4,7 @@ package com.example.whatsapp;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -34,6 +35,8 @@ public class ProfileActivity extends AppCompatActivity
     private DatabaseReference UserRef, ChatRequestRef, ContactsRef, NotificationRef;
     private FirebaseAuth mAuth;
 
+    Toolbar ProfileToolBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -47,6 +50,12 @@ public class ProfileActivity extends AppCompatActivity
         ChatRequestRef = FirebaseDatabase.getInstance().getReference().child("Chat Requests");
         ContactsRef = FirebaseDatabase.getInstance().getReference().child("Contacts");
         NotificationRef = FirebaseDatabase.getInstance().getReference().child("Notifications");
+
+        ProfileToolBar = (Toolbar) findViewById(R.id.profile_toolbar);
+        setSupportActionBar(ProfileToolBar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Profile Request");
 
 
         receiverUserID = getIntent().getExtras().get("visit_user_id").toString();
